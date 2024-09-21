@@ -1,1 +1,1 @@
-# Lab exercises from my Machine Learning and Deep Learning master's degree
+# Assignments from my master's degree course in Machine Learning and Deep Learning
