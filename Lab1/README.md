@@ -2,20 +2,20 @@
 
 - Write a function that takes a 1D NumPy array and computes its reverse vector.
 - Given the following square array, compute the product of the elements on its diagonal: 
-  ```math
-  [[1 3 8], [-1 3 0], [-3 9 2]]
+  ```
+  [[1, 3, 8], [-1, 3, 0], [-3, 9, 2]]
   ```
 - Create a random vector of size (3, 6) and find its mean value.
 - Given two arrays a and b, compute how many times an element in a is higher than the corresponding element in b:
-  ```math
+  ```
   a = [[1, 5, 6, 8], [2, -3, 13, 23], [0, -10, -9, 7]]
   ```
-  ```math
+  ```
   b = [[-3, 0, 8, 1], [-20, -9, -1, 32], [7, 7, 7, 7]]
   ```
 - Create and normalize the following matrix (use min-max normalization):
-  ```math
-  [[0.35 -0.27 0.56], [0.15 0.65 0.42], [0.73 -0.78 -0.08]]
+  ```
+  [[0.35, -0.27, 0.56], [0.15, 0.65, 0.42], [0.73, -0.78, -0.08]]
   ```
 
 ### Assignment
