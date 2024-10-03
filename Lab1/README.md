@@ -24,8 +24,8 @@ Let’s run a little benchmark! Given a matrix $A\in\mathbb{R}^{N\times M}$ and 
 
 $$d(a,b)=\sqrt{(a_1-b_1)^2+(a_2-b_2)^2+...+(a_M-b_M)^2}=\sqrt{\sum^M_{j=1}{(a_i-b_i)^2}}$$
 
-By filling in the blanks in `eucl_distance.py`, implement this simple function twice:
+Create a file `eucl_distance.py` and implement this simple function twice:
 - With vanilla Python operators.
 - With optimized NumPy operations.
 
-Which one runs faster? Read the provided code carefully and watch out for mistakes! 😉
+Which one runs faster? Watch out for mistakes! 😉
