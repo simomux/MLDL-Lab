@@ -1,6 +1,5 @@
 import numpy as np
 
-
 eps = np.finfo(float).eps
 
 
@@ -23,7 +22,7 @@ def sigmoid(x):
     Apply the sigmoid function on x.
     See https://en.wikipedia.org/wiki/Sigmoid_function
     """
-    return None
+    return 1 / (1 + np.exp(-x))
 
 
 def loss(y_true, y_pred):
@@ -49,7 +48,11 @@ def loss(y_true, y_pred):
 
     https://ml-cheatsheet.readthedocs.io/en/latest/loss_functions.html#cross-entropy
     """
-    return None
+
+    epsilon = 1e-10
+    y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
+
+    return -np.mean(y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred))
 
 
 def dloss_dw(y_true, y_pred, X):
@@ -78,7 +81,8 @@ def dloss_dw(y_true, y_pred, X):
     Compute the derivative of loss function w.r.t. weights.
     For its computation, please refer to the slide.
     """
-    return None
+
+    return -(np.dot(np.transpose(X), (y_true - y_pred)) / N)
 
 
 class LogisticRegression:
@@ -113,20 +117,23 @@ class LogisticRegression:
         self.w = np.random.randn(n_features) * 0.001
 
         for e in range(n_epochs):
-
             """
             # Compute predictions
             # -> p = ...
             """
+
+            p = self.predict(X)
 
             """
             # Print loss between Y and predictions p
             # -> L = ...
             """
 
+            L = loss(Y, p)
+
             # Uncomment the following lines when the loss is implemented to print it
-            # if verbose and e % 500 == 0:
-            #     print(f'Epoch {e:4d}: loss={L}')
+            if verbose and e % 500 == 0:
+                print(f'Epoch {e:4d}: loss={L}')
 
             """
             # Update w based on the gradient descent rule
@@ -134,8 +141,9 @@ class LogisticRegression:
             # -> self.w = ...
             """
 
-            pass
+            derivative = dloss_dw(Y, p, X)
 
+            self.w = self.w - learning_rate * derivative
 
     def predict(self, X):
         """
@@ -160,5 +168,7 @@ class LogisticRegression:
         c) discretize the output (this way, y in {0,1})
         """
 
+        dot = np.dot(self.w, np.transpose(X))
+
         # remove random prections before coding the solution
-        return np.random.randint(2, size=X.shape[0])
+        return np.where(sigmoid(dot) >= 0.5, 1, 0)
