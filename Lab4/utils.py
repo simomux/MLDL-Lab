@@ -1,6 +1,7 @@
 import numpy as np
 
 import matplotlib.pyplot as plt
+
 plt.ion()
 
 
@@ -88,7 +89,6 @@ def visualize_predictions(X_img, gt, pred):
     labels = ['non_people', 'people']
 
     while True:
-
         # sample
         idx = np.random.choice(np.arange(0, X_img.shape[0]))
         img = X_img[idx]
@@ -99,42 +99,43 @@ def visualize_predictions(X_img, gt, pred):
 
         plt.waitforbuttonpress()
 
-def people_visualization(X,y):
 
+def people_visualization(X, y):
     plt.subplot(121)
     plt.title('Class 0. Non people')
     X_0 = X[y == 0.0]
     random_idx_1 = np.random.choice(np.arange(0, X_0.shape[0]))
     plt.imshow(X_0[random_idx_1], cmap='gray')
-    plt.grid(b=False)
+    plt.grid(False)
 
     plt.subplot(122)
     plt.title('Class 1. People')
     X_1 = X[y == 1.0]
     random_idx_2 = np.random.choice(np.arange(0, X_1.shape[0]))
     plt.imshow(X_1[random_idx_2], cmap='gray')
-    plt.grid(b=False)
+    plt.grid(False)
 
     plt.show()
     plt.waitforbuttonpress()
 
-def people_visualize_prediction(X,y,y_pred):
 
+def people_visualize_prediction(X, y, y_pred):
     labels = ['Non people', 'People']
     num_row, num_col = 2, 6
-    f,subplots = plt.subplots(num_row, num_col, sharex='col', sharey='row')
+    f, subplots = plt.subplots(num_row, num_col, sharex='col', sharey='row')
 
     for i in range(num_row):
         for j in range(num_col):
             idx = np.random.choice(np.arange(0, X.shape[0]))
-            subplots[i,j].imshow(X[idx], cmap='gray', interpolation='nearest', aspect='auto')
+            subplots[i, j].imshow(X[idx], cmap='gray', interpolation='nearest', aspect='auto')
             title = 'GT: {} \n Pred: {}'.format(labels[int(y[idx])], labels[int(y_pred[idx])])
             color_title = 'green' if int(y[idx]) == int(y_pred[idx]) else 'red'
-            subplots[i,j].set_title(title, color=color_title, fontweight="bold")
-            subplots[i,j].grid(b=False)
+            subplots[i, j].set_title(title, color=color_title, fontweight="bold")
+            subplots[i, j].grid(b=False)
 
     f.set_size_inches(13.5, 7.5)
     plt.waitforbuttonpress()
+
 
 def plot_pegasos_margin(X, Y, model, title=''):
     """
@@ -175,5 +176,3 @@ def plot_pegasos_margin(X, Y, model, title=''):
     plt.yticks(())
     plt.title(title)
     plt.waitforbuttonpress()
-
-

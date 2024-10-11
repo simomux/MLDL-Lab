@@ -5,6 +5,7 @@ from os.path import join
 from sklearn.datasets import make_moons
 from google_drive_downloader import GoogleDriveDownloader
 
+
 def gaussians_dataset(n_gaussian, n_points, mus, stds):
     """
     Provides a dataset made by several gaussians.
@@ -33,15 +34,14 @@ def gaussians_dataset(n_gaussian, n_points, mus, stds):
     X = []
     Y = []
     for i in range(0, n_gaussian):
-
         mu = mus[i]
         std = stds[i]
         n_pt = n_points[i]
 
         cov = np.diag(std)
 
-        X.append(np.random.multivariate_normal(mu, cov, size=2*n_pt))
-        Y.append(np.ones(shape=2*n_pt) * i)
+        X.append(np.random.multivariate_normal(mu, cov, size=2 * n_pt))
+        Y.append(np.ones(shape=2 * n_pt) * i)
 
     X = np.concatenate(X, axis=0)
     Y = np.concatenate(Y, axis=0)
@@ -53,7 +53,7 @@ def gaussians_dataset(n_gaussian, n_points, mus, stds):
     X = tot[:, :-1]
     Y = tot[:, -1]
 
-    n_train_samples = X.shape[0]//2
+    n_train_samples = X.shape[0] // 2
 
     X_train = X[:n_train_samples]
     Y_train = Y[:n_train_samples]

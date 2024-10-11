@@ -57,7 +57,10 @@ class SVM:
         """
         Write HERE the code for computing the Pegasos loss function.
         """
-        return np.random.rand(1)[0]
+
+        # return np.random.rand(1)[0]
+        prod = y_true * y_pred
+        return np.mean(np.where(prod > 0, prod, 0))
 
     def fit_gd(self, X, Y, verbose=False):
         """
@@ -89,7 +92,12 @@ class SVM:
                 """
                 Write HERE the update step.
                 """
-                pass
+                t += 1
+                nt = 1 / (t * self._lambda)
+                if (Y[j] * np.matmul(self._w, X[j])) < 1:
+                   self._w = (1 - nt * self._lambda) * self._w + nt * Y[j] * X[j]
+                else:
+                    self._w = (1 - nt * self._lambda) * self._w
 
             # predict training data
             cur_prediction = np.dot(X, self._w)
@@ -110,6 +118,6 @@ class SVM:
         W * X > 0 -> positive class
         X * X < 0 -> negative class
         """
-        return np.where(np.random.choice(2, X.shape[0]) > 0.0,
-                        self._original_labels[1], self._original_labels[0])
+
+        return np.where(np.dot(X, self._w) > 0.0, self._original_labels[1], self._original_labels[0])
 
