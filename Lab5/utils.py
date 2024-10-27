@@ -1,8 +1,9 @@
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 plt.ion()
-
 cmap = 'jet'
+mpl.use('macosx')
 
 
 def plot_2d_dataset(X, Y, title=''):
