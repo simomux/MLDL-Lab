@@ -22,7 +22,7 @@ def sigmoid(x):
     Apply the sigmoid function on x.
     See https://en.wikipedia.org/wiki/Sigmoid_function
     """
-    return 1 / (1 + np.exp(-x))
+    return np.exp(x) / (1 + np.exp(x))
 
 
 def loss(y_true, y_pred):
@@ -122,7 +122,7 @@ class LogisticRegression:
             # -> p = ...
             """
 
-            p = self.predict(X)
+            p = sigmoid(X @ self.w)
 
             """
             # Print loss between Y and predictions p
@@ -141,9 +141,7 @@ class LogisticRegression:
             # -> self.w = ...
             """
 
-            derivative = dloss_dw(Y, p, X)
-
-            self.w = self.w - learning_rate * derivative
+            self.w = self.w - learning_rate * dloss_dw(Y, p, X)
 
     def predict(self, X):
         """
@@ -167,8 +165,5 @@ class LogisticRegression:
         b) apply the sigmoid function (this way, y in [0,1])
         c) discretize the output (this way, y in {0,1})
         """
-
-        dot = np.dot(self.w, np.transpose(X))
-
         # remove random prections before coding the solution
-        return np.where(sigmoid(dot) >= 0.5, 1, 0)
+        return np.round(sigmoid(X @ self.w))

@@ -11,7 +11,8 @@ def main():
     """ Main function """
 
     # x_train, y_train, x_test, y_test = gaussians_dataset(2, [100, 150], [[1, 3], [-4, 8]], [[2, 3], [4, 1]])
-    x_train, y_train, train_names, x_test, y_test, test_names, feature_names = load_got_dataset(path='data/got.csv', train_split=0.8)
+    x_train, y_train, train_names, x_test, y_test, test_names, feature_names = load_got_dataset(path='data/got.csv',
+                                                                                                train_split=0.8)
 
     logistic_reg = LogisticRegression()
 
@@ -25,6 +26,7 @@ def main():
     print(f'Test accuracy: {accuracy}')
 
     # plot_boundary(x_train, y_train, logistic_reg, title='Training Set')
+
 
 # entry point
 if __name__ == '__main__':
