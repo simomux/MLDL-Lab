@@ -24,6 +24,6 @@ class QLearnAgent(Agent):
     -------
     None
     """
-    # TODO!
-    pass
+    
+    self.Q[old_state[0], old_state[1], action] = self.Q[old_state[0], old_state[1], action] + self.alpha * (reward + self.gamma * max(self.Q[new_state[0], new_state[1]]) - self.Q[old_state[0], old_state[1], action])
     

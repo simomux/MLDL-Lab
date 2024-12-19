@@ -45,19 +45,19 @@ if __name__ == '__main__':
       while True:
         
         # Choose agent's action (epsilon greedy policy)
-        action = ... # TODO!
+        action = agent.get_action_eps_greedy(*state)
         
         # Perform action in the environment (see `perform_action` in Environment)
         new_state, reward, is_over = environment.perform_action(action)
         
         # Update agent's Q function
-        # TODO!
+        agent.update_Q(old_state=state, action=action, reward=reward, new_state=new_state)
 
         # Update cumulative reward (just for logging purposes)
-        # TODO!
+        cumulative_reward += reward
 
         # Update state
-        # TODO!
+        state = new_state
 
         if is_over:
           break
@@ -78,10 +78,10 @@ if __name__ == '__main__':
         # TODO!
 
         # Update cumulative reward
-        # TODO!
+        cumulative_reward += reward
 
         # Update state and action
-        # TODO!
+        state = new_state
 
         if is_over:
           break
@@ -102,13 +102,13 @@ if __name__ == '__main__':
     print(environment)
 
     # Choose agent's action (greedy policy)
-    action = ... # TODO!
+    action = agent.get_action_greedy(*state)
 
     # Perform action in the environment
     new_state, reward, is_over = environment.perform_action(action)
 
     # Update state
-    # TODO!
+    state = new_state
 
     if is_over:
       break
