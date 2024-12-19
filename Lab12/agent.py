@@ -34,16 +34,13 @@ class Agent:
     action: int
       Action sampled according to epsilon-greedy policy.
     """
-    action = 0
-    threshold = random.randint(0, 100)/100
-
-    if (threshold >= 1 - self.epsilon):
-      action = self.get_action_greedy(r, c)
+    eps = random.random()
+    if eps > self.epsilon:
+      return self.get_action_greedy(r,c)
     else:
-      action = random.randint(0, self.n_actions-1)  # Pick action randomly
-      print("Picked action randomly:", action)
+      return random.randint(0, self.n_actions-1)  # Pick action randomly
     
-    return action
+    
 
 
   def get_action_greedy(self, r, c):
@@ -62,13 +59,7 @@ class Agent:
     action: int
       Action sampled according to greedy policy.
     """
-    max_elem = np.max(self.Q[r,c])  # Return a list with all the scores normalized for each move in that precise position. We then take the max value and we need to get the value on the action axis for the highest score.
-    print("Best greedy action:", max_elem)
-    list_elem = np.where(self.Q == max_elem)
-    print(np.where(self.Q == max_elem))
-
-
-    return np.where(self.Q == max_elem)[2]
+    return self.Q[r,c].argmax()
 
   def update_Q(self, old_state, action, reward, new_state):
     raise NotImplementedError()

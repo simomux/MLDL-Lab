@@ -65,23 +65,23 @@ if __name__ == '__main__':
     elif args.mode == 'sarsa':
 
       # Get initial action
-      action = ... # TODO!
+      action = agent.get_action_eps_greedy(*state)
       
       is_over = False
       while True:
-        # TODO!
 
         # Perform action in the environment
         new_state, reward, is_over = environment.perform_action(action)
         
         # Update agent's Q function and get next action
-        # TODO!
+        next_action = agent.update_Q(old_state=state, action=action, reward=reward, new_state=new_state)
 
         # Update cumulative reward
         cumulative_reward += reward
 
         # Update state and action
         state = new_state
+        action = next_action
 
         if is_over:
           break

@@ -25,5 +25,7 @@ class SarsaAgent(Agent):
     -------
     None
     """
-    # TODO!
-    pass
+    next_action = self.get_action_eps_greedy(new_state[0], new_state[1])
+    self.Q[old_state[0], old_state[1], action] = self.Q[old_state[0], old_state[1], action] + self.alpha * (reward + self.gamma * self.Q[new_state[0], new_state[1], next_action] - self.Q[old_state[0], old_state[1], action])
+    return next_action
+    
